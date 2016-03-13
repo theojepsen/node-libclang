@@ -12,11 +12,11 @@ var tu = libclang.TranslationUnit.fromSource(index, 'myLibrary.h', ['-I/path/to/
 
 tu.cursor.visitChildren(function (parent) {
   switch (this.kind) {
-    case libclang.Type.CXCursor_FunctionDecl:
+    case libclang.Cursor.FunctionDecl:
       console.log(this.spelling);
       break;
   }
-  return libclang.CXChildVisit_Continue;
+  return libclang.Cursor.Continue;
 });
 
 index.dispose();
