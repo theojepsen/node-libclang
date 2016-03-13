@@ -7,14 +7,12 @@ AST Traversal
 ```javascript
 var libclang = require('libclang');
 
-var index = new libclang.index();
-var tu = new libclang.translationunit();
+var index = new libclang.Index();
+var tu = libclang.TranslationUnit.fromSource(index, 'myLibrary.h', ['-I/path/to/my/project']);
 
-tu.fromSource(idx, 'myLibrary.h', ['-I/path/to/my/project']);
-
-tu.cursor().visitChildren(function (parent) {
+tu.cursor.visitChildren(function (parent) {
   switch (this.kind) {
-    case libclang.KINDS.CXCursor_FunctionDecl:
+    case libclang.Type.CXCursor_FunctionDecl:
       console.log(this.spelling);
       break;
   }
